@@ -1,4 +1,4 @@
-import React,{createContext,useState,useMemo} from 'react'
+import React,{createContext,useState,useMemo,useCallback,useRef,useEffect} from 'react'
 
 import Header from './jHeader'
 import Submit from './submitButton'
@@ -9,9 +9,31 @@ export const JournalContext = createContext()
 const {Provider} = JournalContext
 
 const Journal =({children,...otherProps})=>{
+    
+    const [entry,setEntry] = useState('')
 
+    let send = useCallback(()=>{console.log(entry)},[entry])
+   
+    const setE = useCallback(
+        (e) => {
+            setEntry(e.target.value) 
+        },
+        [entry]
+    )
+    const value = useMemo(() => ({ setE,send }), [setE,send])
+
+    const componentJustMounted = useRef(true)
+//   useEffect(
+//     () => {
+//     if (!componentJustMounted.current) {
+        
+//       }
+//      componentJustMounted.current = false
+//     },
+//     [entry]
+//   )
     return(
-        <Provider>
+        <Provider value={value}>
             <div>
                 {children}
             </div>
