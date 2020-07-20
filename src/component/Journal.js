@@ -22,16 +22,7 @@ const Journal =({children,...otherProps})=>{
     )
     const value = useMemo(() => ({ setE,send }), [setE,send])
 
-    const componentJustMounted = useRef(true)
-//   useEffect(
-//     () => {
-//     if (!componentJustMounted.current) {
-        
-//       }
-//      componentJustMounted.current = false
-//     },
-//     [entry]
-//   )
+
     return(
         <Provider value={value}>
             <div>
